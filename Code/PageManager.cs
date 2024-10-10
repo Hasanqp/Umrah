@@ -1,0 +1,33 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace Umrah.Code.Helper
+{
+    public class PageManager
+    {
+        private readonly Main main;
+        public PageManager(Main main)
+        {
+            this.main = main;
+        }
+
+        public void LoadPage(UserControl PageUserControl)
+        {
+            // Load old page
+            var OldPage = main.panelContainer.Controls.OfType<UserControl>().FirstOrDefault();
+            if (OldPage != null)
+            {
+                main.panelContainer.Controls.Remove(OldPage);  // Remove Old Page
+                OldPage.Dispose();
+            }
+
+            //Load New Page
+            PageUserControl.Dock = DockStyle.Fill;
+            main.panelContainer.Controls.Add(PageUserControl);
+
+        }
+    }
+}
